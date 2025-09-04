@@ -33,7 +33,8 @@ def load_pipeline():
         torch_dtype=torch.bfloat16
     )
     pipe.enable_model_cpu_offload()
-    pipe.to("cuda")
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    pipe.to(device)
     return pipe
 
 pipe = load_pipeline()
